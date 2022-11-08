@@ -13,22 +13,22 @@
 #  - name: Adicionando repositorios para Google-Chrome
 #    shell: wget -q -O - https://dl-ssl-google.com/linux/linux_signing_key.pub | apt-key add -
 #    shell: sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
-  - name: ATUALIZANDO REPOSITORIO
-    apt:
-      update-cache: yes
-  - name: Instalando pacotes essenciais
-    become: true
-    apt: 
-      name: "{{ item }}"
-    loop:
-      - sl
-      - wget
-      - vlc
-      - hardinfo
-      - chromium-browser
-      - rar
+- name: ATUALIZANDO REPOSITORIO
+  apt:
+    update-cache: yes
+- name: Instalando pacotes essenciais
+  become: true
+  apt: 
+  name: "{{ item }}"
+  loop:
+    - sl
+    - wget
+    - vlc
+    - hardinfo
+    - chromium-browser
+    - rar
 #      - google-chrome-stable
-      - git
+    - git
 #  - name: Instalando pacotes Active Directory
 #    become: true
 #    apt: 
