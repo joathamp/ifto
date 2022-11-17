@@ -5,3 +5,18 @@
     - name: Update apt cache
       apt:
         update_cache: yes
+
+    - name: Instalando pacotes necessarios
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - vim
+        - curl
+        - unzip
+        - sl
+        - wget
+        - vlc
+        - hardinfo
+        - rar
+        - git 
