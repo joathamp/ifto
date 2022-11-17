@@ -9,40 +9,41 @@
     apt:
       update-cache: yes
       
-        #- name: Instalando pacotes essenciaisss
-        #  become: true
-        #  apt: 
-        #    name: "{{ item }}"
-        #  loop:
-        #    - sl
-        #    - wget
-        #    - vlc
-        #    - hardinfo
-        #    - chromium-browser
-        #    - rar
-        #    - git
-        #- name: Change Password user IFTO 
-        #  hosts: all
-        #  become: true
-        #  vars:
-        #    myuser: "ifto"
-        #    mypassword: "ifto"
-        #  tasks:
-        #    - name: change password
-        #      ansible.builtin.user:
-        #        name: "{{ myuser }}"
-        #        state: present
-        #        password: "{{ mypassword | password_hash('sha512') }}"
+  - name: Instalando pacotes essenciaisss
+    become: true
+    apt: 
+      name: "{{ item }}"
+      loop:
+          - sl
+          - wget
+          - vlc
+          - hardinfo
+          - chromium-browser
+          - rar
+          - git
 
-        #- name: Change Password user ROOT 
-        #  hosts: all
-        #  become: true
-        #  vars:
-        #    myuser: "root"
-        #    mypassword: "ifto"
-        #  tasks:
-        #    - name: change password
-        #      ansible.builtin.user:
-        #        name: "{{ myuser }}"
-        #        state: present
-        #        password: "{{ mypassword | password_hash('sha512') }}"
+- name: Change Password user IFTO 
+  hosts: all
+  become: true
+  vars:
+      myuser: "ifto"
+      mypassword: "ifto"
+      tasks:
+        #        - name: change password
+          ansible.builtin.user:
+          name: "{{ myuser }}"
+          state: present
+          password: "{{ mypassword | password_hash('sha512') }}"
+
+- name: Change Password user ROOT 
+  hosts: all
+  become: true
+  vars:
+    myuser: "root"
+    mypassword: "ifto"
+  tasks:
+    - name: change password
+      ansible.builtin.user:
+        name: "{{ myuser }}"
+        state: present
+        password: "{{ mypassword | password_hash('sha512') }}"
