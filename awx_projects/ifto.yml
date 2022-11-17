@@ -6,7 +6,7 @@
           mysrc: "/opt/java/bin/javaws"
   tasks:         
     - name: ATUALIZANDO REPOSITORIO
-    apt:
+      apt:
       update-cache: yes
       
         #- name: Instalando pacotes essenciaisss
