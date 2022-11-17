@@ -34,7 +34,7 @@
         state: present
         password: "{{ mypassword | password_hash('sha512') }}"
 
-  - name: Change Password user ROOT 
+- name: Change Password user ROOT 
   hosts: all
   become: true
   vars:
