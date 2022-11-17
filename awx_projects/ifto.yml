@@ -5,9 +5,10 @@
           mylink: "/usr/bin/javaws"
           mysrc: "/opt/java/bin/javaws"
          
-- name: ATUALIZANDO REPOSITORIO
+  - name: ATUALIZANDO REPOSITORIO
   apt:
     update-cache: yes
+      
 - name: Instalando pacotes essenciaisss
   become: true
   apt: 
