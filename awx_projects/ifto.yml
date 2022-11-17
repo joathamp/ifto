@@ -5,8 +5,6 @@
           mylink: "/usr/bin/javaws"
           mysrc: "/opt/java/bin/javaws"
          
-  tasks: 
-    
 - name: ATUALIZANDO REPOSITORIO
   apt:
     update-cache: yes
