@@ -21,7 +21,7 @@
     - chromium-browser
     - rar
     - git
-  - name: Change Password user IFTO 
+- name: Change Password user IFTO 
   hosts: all
   become: true
   vars:
