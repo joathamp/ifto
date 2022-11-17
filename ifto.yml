@@ -6,17 +6,10 @@
           mysrc: "/opt/java/bin/javaws"
          
   tasks: 
-#  - name: Adicionando repositorios para AD
-#    shell: add-apt-repository -y ppa:emoraes25/cid
-#  - name: Adicionando repositorios para TokenAdmin
-#    shell: add-apt-repository -y ppa:linuxuprising/libpng12
-#  - name: Adicionando repositorios para Google-Chrome
-#    shell: wget -q -O - https://dl-ssl-google.com/linux/linux_signing_key.pub | apt-key add -
-#    shell: sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
-- name: ATUALIZANDO REPOSITORIO
+  - name: ATUALIZANDO REPOSITORIO
   apt:
     update-cache: yes
-- name: Instalando pacotes essenciais
+  - name: Instalando pacotes essenciais
   become: true
   apt: 
     name: "{{ item }}"
@@ -27,59 +20,8 @@
     - hardinfo
     - chromium-browser
     - rar
-#      - google-chrome-stable
     - git
-#  - name: Instalando pacotes Active Directory
-#    become: true
-#    apt: 
-#      name: "{{ item }}"
-#    loop:
-#      - cid
-#      - cid-gtk
-#  - name: Instalando pacotes para Token Starsign
-#    become: true
-#    apt: 
-#      name: "{{ item }}"
-#    loop:
-#      - pcscd
-#      - libccid
-#      - libjbig0
-#      - libpcsclite1
-#      - opensc
-#      - libpng12-0
-#  - name: Baixando pacotes do GIT
-#    shell: git clone https://gitlab.ifto.edu.br/lucas/debian_pkg.git
-#  - name: Instalando pacotes-DEPENDENCIAS para Token Starsign
-#    become: true
-#    apt: 
-#      deb: "{{ item }}"
-#    loop:
-#      - /root/debian_pkg/multiarch-support_2.28-10_amd64.deb
-#      - /root/debian_pkg/libgdbm3_1.8.3-14_amd64.deb
-#      - /root/debian_pkg/libssl1.0.0_1.0.2n-1ubuntu5.7_amd64.deb
-#      - /root/debian_pkg/libjpeg62-turbo_1.5.2-2+b1_amd64.deb
-#      - /root/debian_pkg/libwxbase2.8-0_2.8.12.1+dfsg2-dmo4_amd64.deb
-#      - /root/debian_pkg/libwxgtk2.8-0_2.8.12.1+dfsg2-dmo4_amd64.deb
-#      - /root/debian_pkg/google-chrome-stable_current_amd64.deb
-#  - name: Instalando SafeSign
-#    apt:
-#      deb: /root/debian_pkg/SafeSign.deb
-#  - name: INSTALACAO DO HOD SIASG - CRIACAO DIRETORIO
-#    file: 
-#      path: /opt/java
-#      state: directory
-#  - name: INSTALACAO DO HOD SIASG - COPIA DOS ARQUIVOS
-#    copy:
-#      src: /root/debian_pkg/jre1.8.0_321/ 
-#      dest: /opt/java/
-#      remote_src: yes
-#  - name: INSTALACAO DO HOD SIASG - CRIANDO O LINK
-#    ansible.builtin.file:
-#            src: "{{ mysrc }}"
-#            dest: "{{ mylink }}"
-#            state: link
-
-- name: Change Password user IFTO 
+  - name: Change Password user IFTO 
   hosts: all
   become: true
   vars:
@@ -92,7 +34,7 @@
         state: present
         password: "{{ mypassword | password_hash('sha512') }}"
 
-- name: Change Password user ROOT 
+  - name: Change Password user ROOT 
   hosts: all
   become: true
   vars:
