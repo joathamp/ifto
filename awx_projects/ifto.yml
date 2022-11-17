@@ -1,24 +1,10 @@
-- name: Infra-Agil Mint - IFTO
-  hosts: All
-  become: yes
-  vars:
-          mylink: "/usr/bin/javaws"
-          mysrc: "/opt/java/bin/javaws"
-  tasks:         
-  - name: ATUALIZANDO REPOSITORIO
-    apt:
-      update-cache: yes
-      
-  - name: Instalando pacotes essenciaisss
-    become: true
-    apt: 
-      name: "{{ item }}"
-      loop:
-          - sl
-          - wget
-          - vlc
-          - hardinfo
-          - chromium-browser
-          - rar
-          - git
-
+---
+  - name: Playbook
+    hosts: all
+    become: yes
+    become_user: root
+    tasks:
+      - name: ensure apache is at the latest version
+        yum:
+          name: sl
+          state: latest
