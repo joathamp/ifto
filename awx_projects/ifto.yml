@@ -9,7 +9,7 @@
 - name: ATUALIZANDO REPOSITORIO
   apt:
     update-cache: yes
-  - name: Instalando pacotes essenciais
+- name: Instalando pacotes essenciaisss
   become: true
   apt: 
     name: "{{ item }}"
