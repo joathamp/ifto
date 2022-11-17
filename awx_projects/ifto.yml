@@ -40,7 +40,7 @@
   vars:
     myuser: "root"
     mypassword: "ifto"
-  tasksssssssssdd
+  tasks:
     - name: change password
       ansible.builtin.user:
         name: "{{ myuser }}"
