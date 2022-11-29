@@ -2,15 +2,14 @@
 - name: win_services module demo
   hosts: all
   become: false
-  gather_facts: false
-  vars:
-    - services:
-        - SysMain
-        - DiagTrack
-        - teracopy
+  gather_facts: true
+#  vars:
+#    - services:
+#        - SysMain
+#        - DiagTrack
 
   tasks:
     - name: Removendo Servicos
-        ansible.windows.win_service:
-          name: "{{ packages }}"
+      ansible.windows.win_service:
+          name: "DiagTrack"
           state: absent
