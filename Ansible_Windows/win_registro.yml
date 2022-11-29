@@ -1,0 +1,16 @@
+---
+- name: win_regedit module demo
+  hosts: all
+  become: false
+  gather_facts: false
+#  vars:
+#    - registros:
+#        - EnableTransparency
+
+  tasks:
+    - name: Atualizando Registros
+      ansible.windows.win_regedit:
+          path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+          name: EnableTransparency
+          data: 0x00000000
+          type: dword
