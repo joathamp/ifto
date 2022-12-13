@@ -1,0 +1,9 @@
+---
+- name: Desligar maquinas
+  hosts: all
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Delay shutting down the remote node
+      community.general.shutdown:

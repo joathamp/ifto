@@ -9,9 +9,10 @@
 10.11.10.193
 10.11.10.85
 10.11.10.251
+10.11.10.118
 [win:vars]
-ansible_user='Administrador'
-ansible_password='Sup0rt3@'
+ansible_user='ifto'
+ansible_password='1140'
 #ansible_port=5985
 ansible_port=5986
 ansible_connection=winrm
