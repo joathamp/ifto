@@ -1,0 +1,23 @@
+---
+- name: Ingressar Maquinas no AD
+  hosts: win
+  gather_facts: no
+  
+  tasks:
+
+  - name: Ingressar maquinas no ADA
+  win_domain_computer:
+    name: REI-020330.ifto.local
+    domain_server: ifto.local
+    domain_username: 1819630@ifto.local
+    domain_password: "#1404@Lice"
+    dns_hostname: REI-020330.ifto.local
+    ou: "OU=servers,DC=my_org,DC=local"
+    description: Servidor Windows
+    enabled: yes
+    state: present
+  delegate_to: DC2.ifto.local
+  register: domain_state
+
+- ansible.windows.win_reboot:
+    when: domain_state.reboot_required

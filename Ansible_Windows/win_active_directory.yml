@@ -1,5 +1,5 @@
 ---
-- name: UnInstalling Apache MSI
+- name: Ingressar Maquinas no AD
   hosts: win
   gather_facts: no
     #  vars: 
@@ -8,8 +8,8 @@
   tasks:
   - ansible.windows.win_domain_membership:
       dns_domain_name: ifto.local
-      hostname: "REI-041755"
-      domain_admin_user: "1819630"
+      hostname: "REI-020330"
+      domain_admin_user: "1819630@ifto.local"
       domain_admin_password: "#1404@Lice"
       domain_ou_path: "OU=IFTO,DC=ifto,DC=local"
       state: domain
