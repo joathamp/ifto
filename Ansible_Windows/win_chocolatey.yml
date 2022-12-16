@@ -5,21 +5,21 @@
   gather_facts: false
   vars:
     - packages:
-        - notepadplusplus
-        - googlechrome
-        - teracopy
-        - 7zip
-        - firefox
-        - libreoffice-fresh
-        - foxitreader
-        - jre8
-        - chrome-remote-desktop-chrome
-        - chrome-remote-desktop-host
-        - dotnetfx
-        - cutepdf
-        - vlc
-        - dellcommandupdate
-        - anydesk
+       - notepadplusplus
+       - googlechrome
+       - teracopy
+       - 7zip
+       - firefox
+       - libreoffice-fresh
+       - foxitreader
+       - jre8
+       - chrome-remote-desktop-chrome
+       - chrome-remote-desktop-host
+       - dotnetfx
+       - cutepdf
+       - vlc
+       - dellcommandupdate
+       - anydesk
 
   tasks:
     - name: install packages

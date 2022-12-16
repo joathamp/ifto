@@ -8,5 +8,11 @@
 #        - EnableTransparency
 
   tasks:
-  - name: Run a command under PowerShell
-    win_shell: reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+    # - name: Habilitar Acesso remoto
+    #    win_shell: reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+    
+    #- name: Remover Cortana
+    #  win_shell: Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
+    
+    - name: Remover Cortana
+      win_shell: shutdown -s -t 2

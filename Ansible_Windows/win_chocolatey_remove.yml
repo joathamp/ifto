@@ -1,0 +1,26 @@
+---
+- name: win_chocolatey module demo
+  hosts: all
+  become: false
+  gather_facts: false
+    #vars:
+    #- packages:
+    #  - Microsoft.SkypeApp
+
+  tasks:
+    - name: remove windows apps as user
+      ansible.windows.win_package:
+        product_id: "{{ item }}"
+        state: absent
+      loop:
+        - 'Microsoft.MicrosoftOfficeHub'
+        - 'Microsoft.MixedReality.Portal'
+        - 'Microsoft.Office'
+        - 'Microsoft.Office.*'
+        - 'Microsoft.Office.OneNote'
+        - 'Microsoft.Office.OneDrive'
+        - 'Microsoft.People'
+        - 'Microsoft.SkypeApp'
+        - 'Microsoft.WindowsStore'
+        - 'Microsoft.ZuneVideo'
+
