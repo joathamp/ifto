@@ -23,4 +23,13 @@
         - 'Microsoft.SkypeApp'
         - 'Microsoft.WindowsStore'
         - 'Microsoft.ZuneVideo'
+        - 'O365HomePremRetail'
+        - 'officeproplus2013'
+        - 'office365business'
+        - 'office365proplus'
+        - 'office365homepremium'
+        - 'O365ProPlusRetail'
+        - 'O365BusinessRetail'
+        - 'O365SmallBusPremRetail'
+        - 'O365ProPlusRetail'
 
