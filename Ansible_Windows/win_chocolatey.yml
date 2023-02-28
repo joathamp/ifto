@@ -20,7 +20,6 @@
     - vlc
     - dellcommandupdate
     - anydesk
-    - visualbasic6-kb896559
   tasks:
   - name: Install steam
     win_chocolatey:
