@@ -9,7 +9,7 @@
 
   tasks:
     - name: Atualizando Registros
-      ansible.windows.win_regedit:
+      win_regedit:
           path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
           name: EnableTransparency
           data: 0x00000000

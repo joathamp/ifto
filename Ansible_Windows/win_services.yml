@@ -10,6 +10,6 @@
 
   tasks:
     - name: Removendo Servicos
-      ansible.windows.win_service:
+      win_service:
           name: "DiagTrack"
           state: absent
