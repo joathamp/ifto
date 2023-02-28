@@ -1,15 +1,11 @@
 ---
-- name: win_services module demo
-  hosts: all
-  become: false
-  gather_facts: true
-#  vars:
-#    - services:
-#        - SysMain
-#        - DiagTrack
+- hosts: all
+  #  become: runas
+  #  gather_facts: false
 
   tasks:
-    - name: Removendo Servicos
-      win_service:
-          name: "DiagTrack"
-          state: absent
+  - name: Desativando Telemetria
+    win_service:
+      name: "DiagTrack"
+      state: absent
+

@@ -8,7 +8,7 @@
 #        - EnableTransparency
 
   tasks:
-    - name: Atualizando Registros
+    - name: Atualizando Registros - Desabilitando transparencia
       win_regedit:
           path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
           name: EnableTransparency
