@@ -21,7 +21,7 @@
     - dellcommandupdate
     - anydesk
   tasks:
-  - name: Install steam
+  - name: Instalando Pacotes 
     win_chocolatey:
       name: "{{ packages }}"
       state: present
