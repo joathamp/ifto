@@ -1,6 +1,6 @@
 ---
 - name: Install Microsoft Baseline Security Analyzer
-  hosts: windows
+  hosts: all
   gather_facts: yes
 
   tasks:
