@@ -1,0 +1,20 @@
+---
+- name: Install Microsoft Baseline Security Analyzer
+  hosts: windows
+  gather_facts: yes
+
+  tasks:
+  - name: Download MBSA installer
+    win_get_url:
+      url: "https://download.microsoft.com/download/4/4/C/44C4D8C9-13D2-46B2-86DB-03AEC7EA2761/mbsasetup-x64-EN.msi"
+      dest: C:\temp\mbsasetup-x64-EN.msi
+
+  - name: Install MBSA
+    win_package:
+      path: C:\temp\mbsasetup-x64-EN.msi
+      state: present
+
+  - name: Run MBSA scan
+    win_shell: |
+      mbsacli.exe /target {{ inventory_hostname }} /catalog MicrosoftUpdateCatalog.cab /wi
+
