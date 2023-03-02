@@ -1,0 +1,11 @@
+- hosts: All
+  vars:
+    message: "A máquina será reiniciada em 30 Segundos. Salve seu trabalho."
+  tasks:
+    - name: Mostrar mensagem na tela
+      win_msg:
+        title: "Reiniciando Máquina"
+        body: "{{ message }}"
+        timeout: 30
+    - name: Reiniciar Máquina
+      win_reboot:
