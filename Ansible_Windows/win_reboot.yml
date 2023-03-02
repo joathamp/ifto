@@ -1,11 +1,8 @@
-- hosts: All
-  vars:
-    message: "A máquina será reiniciada em 30 Segundos. Salve seu trabalho."
+- name: Playbook Reinicializacao de Maquinas
+  hosts: all
   tasks:
-    - name: Mostrar mensagem na tela
-      win_msg:
-        title: "Reiniciando Máquina"
-        body: "{{ message }}"
-        timeout: 30
-    - name: Reiniciar Máquina
+    - name: restart_windows
       win_reboot:
+        msg: "Seu computador sera reiniciado em 30 segundos. Salve seu trabalho."
+        pre_reboot_delay: 30
+        post_reboot_delay: 40
