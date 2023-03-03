@@ -6,7 +6,7 @@
   vars:
   - packages:
     - netbeans
-    - glpi-agent  
+    - winscp  
 
   tasks:
   - name: Instalando Programas Especificos - IFTO 
