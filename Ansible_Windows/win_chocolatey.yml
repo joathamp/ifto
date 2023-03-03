@@ -20,8 +20,6 @@
     - vlc
     - anydesk
     - glpi-agent  
-
-  vars:
   - programas:
       HP:
         - HP Support Assistant

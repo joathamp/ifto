@@ -1,0 +1,15 @@
+---
+- hosts: all
+  #  become: runas
+  #  gather_facts: false
+
+  vars:
+  - packages:
+    - netbeans
+    - glpi-agent  
+
+  tasks:
+  - name: Instalando Programas Especificos - IFTO 
+    win_chocolatey:
+      name: "{{ packages }}"
+      state: present
