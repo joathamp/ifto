@@ -1,6 +1,15 @@
-- name: Playbook Desligar Maquinas
+- name: Desligar computador
   hosts: all
+  gather_facts: no
   tasks:
-    - name: Executar comando de desligamento
-      win_shell: shutdown /s /t 0
-      become: yes
+  - name: Aguardar confirmação do usuário
+    pause:
+      prompt: "Tem certeza que deseja desligar o computador? (S/N)"
+      echo: true
+    register: confirm
+    async: 15
+    poll: 0
+    ignore_errors: true
+  - name: Desligar computador remoto
+    win_shell: Stop-Computer -Force
+    when: confirm.user_input | lower == 's'
