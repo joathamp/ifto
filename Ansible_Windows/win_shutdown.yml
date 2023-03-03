@@ -1,9 +1,6 @@
----
-- name: Desligar maquinas
+- name: Playbook Desligar Maquinas
   hosts: all
-  become: false
-  gather_facts: false
-
   tasks:
-    - name: Delay shutting down the remote node
-      community.general.shutdown:
+    - name: Executar comando de desligamento
+      win_shell: shutdown /s /t 0
+      become: yes
