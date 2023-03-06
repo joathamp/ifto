@@ -1,17 +1,32 @@
 ---
-- name: win_regedit module demo
+- name: win_regedit Atualizacoes em registro
   hosts: all
   become: false
   gather_facts: false
-#  vars:
-#    - registros:
-#        - EnableTransparency
-
   tasks:
-    - name: Atualizando Registros - Desabilitando transparencia
+    - name: Desabilitando Transparencias
       win_regedit:
           path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
           name: EnableTransparency
           data: 0x00000000
           type: dword
 
+    - name: Set timezone to GMT-3
+      win_timezone:
+        timezone: "Tocantins Standard Time"
+        state: present
+        reboot: yes
+
+    - name: Disable daylight saving time
+      win_reg_stat:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Tocantins Standard Time
+        name: Dynamic DST
+      register: dst_stat
+
+    - name: Set DST to 0 if it's enabled
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Tocantins Standard Time
+        name: Dynamic DST
+        type: dword
+        data: 0
+      when: dst_stat.exists == True and dst_stat.value == 1
