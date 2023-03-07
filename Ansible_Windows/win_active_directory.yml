@@ -1,19 +1,37 @@
 ---
 - name: Ingressar Maquinas no AD
-  hosts: win
+  hosts: all
   gather_facts: no
-    #  vars: 
-    #    - nome_da_maquina: "{{ ansible_netbios_name }}"
+
+  #vars:
+  #  computer_name: "REI-075086"
+
+  #tasks:
+    #- name: Instalar o módulo Active Directory
+      #win_shell: Install-WindowsFeature RSAT-AD-PowerShell
+      #become: true
+      #win_shell: Get-WindowsCapability -Name RSAT.ActiveDirectory* -Online | Add-WindowsCapability -Online
+
+  vars:
+    domain_name: "ifto.local"
+    domain_admin_user: "1819630"
+    domain_admin_password: "#1404@Lice"
 
   tasks:
-  - ansible.windows.win_domain_membership:
-      dns_domain_name: ifto.local
-      hostname: "REI-020330"
-      domain_admin_user: "1819630@ifto.local"
-      domain_admin_password: "#1404@Lice"
-      domain_ou_path: "OU=IFTO,DC=ifto,DC=local"
-      state: domain
-    register: domain_state
+    - name: Verificar se a máquina está em um domínio
+      win_shell: 'if ([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().Name -ne "{{ domain_name }}") { exit 1 }'
+      register: domain_check_result
+      ignore_errors: yes
 
-  - ansible.windows.win_reboot:
-    when: domain_state.reboot_required
+    - name: Adicionar máquina ao domínio
+      win_shell: '(Get-WMIObject -NameSpace "Root\Cimv2" -Class "Win32_ComputerSystem").JoinDomainOrWorkgroup("ifto.local","#1404@Lice","ifto.local\1819630",$null,3)'
+      when: domain_check_result.rc == 1
+      notify:
+      - Reboot Sucesso
+
+  handlers:
+
+     - name: Reboot Sucesso
+       win_reboot:
+         msg: "Máquina inserida no domínio, reiniciando..."
+

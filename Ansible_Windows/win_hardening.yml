@@ -1,20 +1,25 @@
----
-- name: Install Microsoft Baseline Security Analyzer
-  hosts: all
+- hosts: all
   gather_facts: yes
-
+  vars:
+    win_interface_name: "{{ 'Ethernet' }}"
   tasks:
-  - name: Download MBSA installer
-    win_get_url:
-      url: "https://download.microsoft.com/download/4/4/C/44C4D8C9-13D2-46B2-86DB-03AEC7EA2761/mbsasetup-x64-EN.msi"
-      dest: C:\temp\mbsasetup-x64-EN.msi
+    - name: Obter informações do sistema
+      win_shell: Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter "IPEnabled = True" |
+                  Where-Object { $_.Caption -like '*{{ win_interface_name }}*' } |
+                  Select-Object -First 1 |
+                  Select-Object -Property DNSHostName, IPAddress, MACAddress |
+                  ConvertTo-Json -Compress
+      register: output
 
-  - name: Install MBSA
-    win_package:
-      path: C:\temp\mbsasetup-x64-EN.msi
-      state: present
+    - name: Extrair informações
+      set_fact:
+        hostname: "{{ output.stdout | from_json | json_query('DNSHostName') }}"
+        ip_address: "{{ output.stdout | from_json | json_query('IPAddress[0]') }}"
+        mac_address: "{{ output.stdout | from_json | json_query('MACAddress') }}"
 
-  - name: Run MBSA scan
-    win_shell: |
-      mbsacli.exe /target {{ inventory_hostname }} /catalog MicrosoftUpdateCatalog.cab /wi
+    - name: Gravar informações em um arquivo
+      lineinfile:
+        path: c:/arquivo.txt
+        line: "Nome da máquina: {{ hostname }}, IP: {{ ip_address }}, MAC: {{ mac_address }}"
+
 
