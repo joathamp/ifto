@@ -19,17 +19,17 @@
     - cutepdf
     - vlc
     - anydesk
-    - glpi-agent  
+    - python
+    - glpi-agent
   - programas:
       HP:
         - HP Support Assistant
         - HP Security Manager
       Dell:
-        - Dell Command Update
-        - Dell SupportAssist
-
+        - dellcommandupdate
+        - supportassist
   tasks:
-  - name: Instalando Programas Essenciais - IFTO 
+  - name: Instalando Programas Essenciais - IFTO
     win_chocolatey:
       name: "{{ packages }}"
       state: present
@@ -37,11 +37,12 @@
   - name: Verificando o System Vendor da máquina
     win_shell: |
       $vendor = Get-WmiObject -Class:Win32_ComputerSystem | Select-Object -ExpandProperty Manufacturer
-       Write-Host "System Vendor: $vendor"
+       Write-Host "$vendor"
     register: system_vendor
 
   - name: Instalando programas do System Vendor
     win_chocolatey:
       name: "{{ item }}"
       state: present
-    with_items: "{{ programas[system_vendor.stdout] }}"
+    with_items: "{{ programas[system_vendor.stdout.split()[0]] }}"
+
