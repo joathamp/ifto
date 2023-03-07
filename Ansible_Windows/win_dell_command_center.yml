@@ -1,0 +1,23 @@
+---
+- hosts: all
+  #  become: runas
+  #  gather_facts: false
+
+  tasks:
+  - name: Configure Dell Command Update
+    win_command: '"C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" /configure -silent -autoSuspendBitLocker=enable -userConsent=disable'
+
+  - name: Run Dell Command Update scan
+    win_command: '"C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" /scan -outputLog=C:\dell\logs\scan.log'
+
+  - name: Apply Dell Command Update updates
+    win_command: '"C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" /applyUpdates -reboot=enable -outputLog=C:\dell\logs\applyUpdates.log'
+    notify:
+      - restart_windows
+
+  handlers:
+    - name: restart_windows
+      win_reboot:
+        msg: "Seu computador foi atualizado e sera reiniciado em 30 segundos."
+        pre_reboot_delay: 30
+        post_reboot_delay: 40

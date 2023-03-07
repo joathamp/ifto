@@ -29,6 +29,11 @@
       notify:
       - Reboot Sucesso
 
+    - name: Remove user 'ifto'
+      win_user:
+        name: ifto
+        state: absent
+
   handlers:
 
      - name: Reboot Sucesso

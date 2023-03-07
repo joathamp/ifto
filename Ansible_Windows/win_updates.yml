@@ -2,23 +2,27 @@
 - name: Playbook Atualizacao do Windows Update
   hosts: all
   tasks:
-    - name: Change power plan to high performance
-      win_power_plan:
-        name: Alto desempenho
+  - name: Change power plan to high performance
+    win_power_plan:
+      name: Alto desempenho
 
-    - name: Choose which Windows updates to install
-      win_updates:
-        category_names:
-        - SecurityUpdates
-        - CriticalUpdates
-        - UpdateRollups
-        - Updates
-        - DefinitionUpdates
-        state: installed
-        log_path: C:\ansible.txt
-      register: result
+  - name: Choose which Windows updates to install
+    win_updates:
+      category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+      - Updates
+      - DefinitionUpdates
+      state: installed
+      log_path: C:\ansible.txt
+    notify:
+      - restart_windows
 
-    - debug: var=result
+  handlers:
+    - name: restart_windows
+      win_reboot:
+        msg: "Seu computador foi atualizado e sera reiniciado em 60 segundos."
+        pre_reboot_delay: 60
+        post_reboot_delay: 70
 
-    - win_reboot:
-      when: result.reboot_required

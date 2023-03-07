@@ -23,8 +23,8 @@
     - glpi-agent
   - programas:
       HP:
-        - HP Support Assistant
-        - HP Security Manager
+        - hpsupportassistant
+        - hpdiagnostics
       Dell:
         - dellcommandupdate
         - supportassist
@@ -45,4 +45,3 @@
       name: "{{ item }}"
       state: present
     with_items: "{{ programas[system_vendor.stdout.split()[0]] }}"
-
